@@ -21,9 +21,12 @@ export class LoginComponent implements OnInit {
   submit(): void {
     this.userService.login(this.user)
         .subscribe( data => {
-          console.log(data);
-          if(data != null)
+          console.log("Data is: " + data);
+          if(data != null){
+            let key:any = data;
+              sessionStorage.setItem('user', data.password);
               this.router.navigateByUrl('/dashboard');
+          }
           else{
               this.message = "Wrong Credential"
               }
