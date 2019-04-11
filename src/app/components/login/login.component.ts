@@ -23,8 +23,7 @@ export class LoginComponent implements OnInit {
         .subscribe( data => {
           console.log("Data is: " + data);
           if(data != null){
-            let key:any = data;
-              sessionStorage.setItem('user', data.password);
+              // sessionStorage.setItem('user', data.password);
               this.router.navigateByUrl('/dashboard');
           }
           else{
