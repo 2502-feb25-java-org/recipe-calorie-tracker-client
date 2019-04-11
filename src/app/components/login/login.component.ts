@@ -13,7 +13,10 @@ export class LoginComponent implements OnInit {
   user:UserNamePassword = new UserNamePassword();
   message:string = "";
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router) { 
+  
+    console.log(sessionStorage.getItem("user"));
+  }
 
   ngOnInit() {
   }
@@ -21,9 +24,11 @@ export class LoginComponent implements OnInit {
   submit(): void {
     this.userService.login(this.user)
         .subscribe( data => {
-          console.log(data);
-          if(data != null)
-              this.router.navigateByUrl('/dashboard');
+          if(data != null){
+            let uu:string = JSON.stringify(data);
+            sessionStorage.setItem('user', uu);
+            this.router.navigateByUrl('/dashboard');
+          }
           else{
               this.message = "Wrong Credential"
               }
