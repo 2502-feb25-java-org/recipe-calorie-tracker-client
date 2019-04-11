@@ -2,17 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-page-not-found',
-  templateUrl: './page-not-found.component.html',
-  styleUrls: ['./page-not-found.component.css']
+  selector: 'app-logout',
+  templateUrl: './logout.component.html',
+  styleUrls: ['./logout.component.css']
 })
-export class PageNotFoundComponent implements OnInit {
+export class LogoutComponent implements OnInit {
+
   time: number = 5;
   interval;
   message:string;
-  constructor(private router:Router) { }
+  constructor(private router: Router) {
+    
+  }
 
   ngOnInit() {
+    sessionStorage.removeItem("user");
+    sessionStorage.clear();
+    localStorage.clear();
     this.interval = setInterval(() => {
       this.time--;
       if(this.time == 0)
@@ -20,3 +26,6 @@ export class PageNotFoundComponent implements OnInit {
     },1000);
   }
 }
+
+
+
