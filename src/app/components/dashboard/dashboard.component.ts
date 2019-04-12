@@ -4,6 +4,7 @@ import { IngredientService } from 'src/app/services/ingredient.service';
 import { DataTablesModule } from 'angular-datatables';
 import { Ingredient } from '../../models/ingredient';
 import { Subject } from 'rxjs';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-dashboard',
