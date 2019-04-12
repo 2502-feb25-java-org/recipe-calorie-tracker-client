@@ -15,6 +15,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { IngredientService } from './services/ingredient.service';
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -33,10 +35,12 @@ import { LogoutComponent } from './components/logout/logout.component';
     AppRoutingModule,
     FormsModule,
     HttpModule,
-    HttpClientModule
+    HttpClientModule,
+    DataTablesModule
   ],
   providers: [
-    UserService
+    UserService,
+    IngredientService
   ],
   bootstrap: [AppComponent]
 })
