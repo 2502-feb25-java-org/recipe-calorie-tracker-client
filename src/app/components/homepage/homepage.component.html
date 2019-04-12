@@ -1,3 +1,49 @@
-<p>
-  homepage works!
-</p>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Recipe Calorie Tracker</title>
+
+</head>
+<header>
+	<a href="https://revature.com/"> <img
+		src="https://3g4d13k75x47q7v53surz1gi-wpengine.netdna-ssl.com/wp-content/themes/revature/imgs/logo.png"
+		width="200" length="200" alt="Revature" />
+	</a>
+</header>
+<body>
+
+	<div align="center">
+		<div class="container">
+			<div class="jumbotron">
+				<legend>Recipe Calorie Tracker</legend>
+				<br>
+				<p text-align="center">Search functionality.</p>
+					<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="Ingredients" class="display">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>NDBNO</th>
+							</tr>
+						</thead>
+						<tbody>
+              <tr *ngFor="let ingredient of ingredients">
+                <td>{{ingredient.id}}</td>
+                <td>{{ingredient.ingredientName}}</td>
+                <td>{{ingredient.ndbno}}</td>
+              </tr>
+						</tbody>
+					</table>
+				</div>
+</div>
+			</div>
+			<script src="search.js" type="text/javascript"></script>
+</body>
+<footer>
+</footer>
+&ensp;&ensp;&ensp; &copy;
+<a href="https://revature.com/our-story/">Revature. All Rights
+	Reserved.</a>
+<br>
+</html>
