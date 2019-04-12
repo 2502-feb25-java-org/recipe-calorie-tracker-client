@@ -1,25 +1,83 @@
-<div align="center">
-		<div class="container">
-			<div class="jumbotron">
-				<legend>Recipe Calorie Tracker</legend>
-				<br>
-				<p text-align="center">Search functionality.</p>
-					<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="Ingredients" class="display">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Name</th>
-								<th>NDBNO</th>
-							</tr>
-						</thead>
-						<tbody>
-              <tr *ngFor="let ingredient of ingredients">
-                <td>{{ingredient.id}}</td>
-                <td>{{ingredient.ingredientName}}</td>
-                <td>{{ingredient.ndbno}}</td>
-              </tr>
-						</tbody>
-					</table>
-				</div>
-</div>
-</div>
+<!-- 
+		<div class="jumbotron">
+			<legend>Recipe Calorie Tracker</legend>
+			<br>
+			<p text-align="center">Search functionality.</p>
+			<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="Ingredients" class="display">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>NDBNO</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let ingredient of ingredients">
+						<td>{{ingredient.id}}</td>
+						<td>{{ingredient.ingredientName}}</td>
+						<td>{{ingredient.ndbno}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div> -->
+
+<div class="container">
+	<div class="row d-flex justify-content-center">
+			<input type="number" placeholder="Enter Maximum Calories for today"/> 
+			<span>{{date}}</span>
+			<button class="btn btn-primary" type="submit">Button</button>
+	</div>
+	<div class="row">
+	  <div class="col-md">
+		<div class="jumbotron">
+			<legend text-align="center">BreakFast</legend>
+			<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="Ingredients" class="display">
+				<thead>
+					<tr>
+						<th>Name</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let ingredient of ingredients">
+						<td>{{ingredient.ingredientName}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	  </div>
+	  <div class="col-md">
+		<div class="jumbotron">
+			<legend text-align="center">Lunch</legend>
+			<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="Ingredients" class="display">
+				<thead>
+					<tr>
+						<th>Name</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let ingredient of ingredients">
+						<td>{{ingredient.ingredientName}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	  </div>
+	  <div class="col-md">
+		<div class="jumbotron">
+			<legend text-align="center">Dinner</legend>
+			<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="Ingredients" class="display">
+				<thead>
+					<tr>
+						<th>Name</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let ingredient of ingredients">
+						<td>{{ingredient.ingredientName}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	  </div>
+	</div>
+  </div>

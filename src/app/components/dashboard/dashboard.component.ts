@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   public ingredients: Ingredient[] = [];
   public dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<void> = new Subject();
+  date:any = new Date().toLocaleDateString();
 
   constructor(private _service: IngredientService, private router: Router) { 
 
@@ -24,6 +25,10 @@ export class DashboardComponent implements OnInit {
     if(sessionStorage.getItem("user") == null){
       this.router.navigateByUrl('');
     }
+    this.displayTables();
+  }
+
+  displayTables(){
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10
@@ -31,14 +36,6 @@ export class DashboardComponent implements OnInit {
     this._service.getIngredients().subscribe( data => {
       this.ingredients = data;
       this.dtTrigger.next();
-      //console.log(this.ingredients);
-      //let ingredients = JSON.parse(data);
-      //console.log(ingredients);
-      //console.log(data);
-      //let obj = JSON.stringify;
-      //console.log(obj);
-      //console.log(obj[0]);
      });
   }
-
 }
