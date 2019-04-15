@@ -24,7 +24,12 @@
 	<div class="row d-flex justify-content-center">
 		<input type="number" [(ngModel)]="maxCalories" placeholder="Enter Maximum Calories for today"/>
 		<span>{{date}}</span>
-		<button class="btn btn-primary" type="submit">Button</button>
+		<button class="btn btn-primary" type="submit">Create meal plan</button>
+	</div>
+	<div>
+		<br>
+		<br>
+		<span allign="center">Remaining calories: {{getRemainingCalories()}}</span>
 	</div>
 	<div class="row">
 		<div class="col-md">
