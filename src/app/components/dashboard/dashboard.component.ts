@@ -64,10 +64,10 @@ export class DashboardComponent implements OnInit {
     };
 
     if (this.breakfastSelectedIngredient) {
-      // this._foodService.getFoods(this.breakfastSelectedIngredient.ingredientName).subscribe( data => {
-      //   this.breakfastFoods = data;
-      //   this.dtTriggerBreakfastFoods.next();
-      // });
+       this._foodService.getFoods(this.breakfastSelectedIngredient.ingredientName).subscribe( data => {
+         this.breakfastFoods = data;
+         this.dtTriggerBreakfastFoods.next();
+       });
     }
   }
 
