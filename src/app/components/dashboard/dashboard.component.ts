@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IngredientService } from 'src/app/services/ingredient.service';
 import { DataTablesModule } from 'angular-datatables';
 import { Ingredient } from '../../models/ingredient';
 import { Subject } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
+import { TagPlaceholder } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,9 +19,17 @@ export class DashboardComponent implements OnInit {
   dtTrigger: Subject<void> = new Subject();
   date:any = new Date().toLocaleDateString();
 
-  constructor(private _service: IngredientService, private router: Router) { 
+  constructor(private ingrediantService: IngredientService, private router: Router) { 
 
   }
+
+  pass(ingredient: Ingredient){
+    console.log(ingredient);
+    $("#break").hide();
+    this.ingrediantService.getNewIngrediants(ingredient);
+    // this.displayNewTables(ingredient);
+  }
+
   ngOnInit() {
     if(sessionStorage.getItem("user") == null){
       this.router.navigateByUrl('');
@@ -33,9 +42,20 @@ export class DashboardComponent implements OnInit {
       pagingType: 'full_numbers',
       pageLength: 10
     };
-    this._service.getIngredients().subscribe( data => {
+    this.ingrediantService.getIngredients().subscribe( data => {
       this.ingredients = data;
       this.dtTrigger.next();
      });
   }
+
+  // displayNewTables(ingredient: Ingredient){
+  //   this.dtOptions = {
+  //     pagingType: 'full_numbers',
+  //     pageLength: 10
+  //   };
+  //   this.ingrediantService.getNewIngredients().subscribe( data => {
+  //     this.ingredients = data;
+  //     this.dtTrigger.next();
+  //    });
+  // }
 }
