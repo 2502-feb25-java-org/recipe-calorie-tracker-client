@@ -25,8 +25,7 @@ export class LoginComponent implements OnInit {
     this.userService.login(this.user)
         .subscribe( data => {
           if(data != null){
-            let uu:string = JSON.stringify(data);
-            sessionStorage.setItem('user', uu);
+            sessionStorage.setItem('user', JSON.stringify(data));
             this.router.navigateByUrl('/dashboard');
           }
           else{

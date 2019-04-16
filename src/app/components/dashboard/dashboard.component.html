@@ -1,79 +1,37 @@
 <!-- 
-	<div class="jumbotron">
-		<legend>Recipe Calorie Tracker</legend>
-		<br>
-		<p text-align="center">Search functionality.</p>
-		<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="Ingredients" class="display">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Name</th>
-					<th>NDBNO</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr *ngFor="let ingredient of ingredients">
-					<td>{{ingredient.id}}</td>
-					<td>{{ingredient.ingredientName}}</td>
-					<td>{{ingredient.ndbno}}</td>
-				</tr>
-			</tbody>
-		</table>
-	</div> -->
+		<div class="jumbotron">
+			<legend>Recipe Calorie Tracker</legend>
+			<br>
+			<p text-align="center">Search functionality.</p>
+			<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="Ingredients" class="display">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>NDBNO</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let ingredient of ingredients">
+						<td>{{ingredient.id}}</td>
+						<td>{{ingredient.ingredientName}}</td>
+						<td>{{ingredient.ndbno}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div> -->
+
 <div class="container">
 	<div class="row d-flex justify-content-center">
-		<input type="number" [(ngModel)]="maxCalories" placeholder="Enter Maximum Calories for today"/>
+		<input type="number" placeholder="Enter Maximum Calories for today" />
 		<span>{{date}}</span>
-		<button class="btn btn-primary" type="submit">Create meal plan</button>
-	</div>
-	<div>
-		<br>
-		<br>
-		<span allign="center">Remaining calories: {{getRemainingCalories()}}</span>
+		<button class="btn btn-primary" type="submit">Submit</button>
 	</div>
 	<div class="row">
-		<div class="col-md">
+		<div class="col-md" id="break">
 			<div class="jumbotron">
 				<legend text-align="center">BreakFast</legend>
-				<div *ngIf="!breakfastSelectedIngredient">
-					<table datatable [dtOptions]="dtOptionsBreakfastIngredients" [dtTrigger]="dtTriggerBreakfastIngredients" id="breakfastIngredients" class="display">
-						<thead>
-							<tr>
-								<th>Name</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr *ngFor="let ingredient of ingredients" (click)="onBreakfastIngredientSelect(ingredient)">
-								<td>{{ingredient.ingredientName}}</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div *ngIf="breakfastSelectedIngredient && !breakfastSelectedFood">
-					<table datatable [dtOptions]="dtOptionsBreakfastFoods" [dtTrigger]="dtTriggerBreakfastFood" id="breakfastFoods" class="display">
-						<thead>
-							<tr>
-								<th>Food</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr *ngFor="let food of breakfastFoods" (click)="onBreakfastFoodSelect(food)">
-								<td>{{food.name}}</td>
-							</tr>
-						</tbody>
-					</table>
-					<button (click)="onBreakfastIngredientSelect(null)">Reset</button>
-				</div>
-				<div *ngIf="breakfastSelectedFood">
-					{{breakfastSelectedFood.foodName}}
-					<button (click)="onBreakfastSelectedFoodReset()">Reset</button>
-				</div>
-			</div>
-		</div>
-		<div class="col-md">
-			<div class="jumbotron">
-				<legend text-align="center">Lunch</legend>
-				<table datatable [dtOptions]="dtOptionsLunchIngredients" [dtTrigger]="dtTriggerLunchIngredients" id="lunchIngredients" class="display">
+				<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="Ingredients" class="display">
 					<thead>
 						<tr>
 							<th>Name</th>
@@ -81,7 +39,25 @@
 					</thead>
 					<tbody>
 						<tr *ngFor="let ingredient of ingredients">
-							<td>{{ingredient.ingredientName}}</td>
+							<td (click)="pass(ingredient)">{{ingredient.ingredientName}}</td>
+							
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-md">
+			<div class="jumbotron">
+				<legend text-align="center">Lunch</legend>
+				<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="Ingredients" class="display">
+					<thead>
+						<tr>
+							<th>Name</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let ingredient of ingredients">
+							<td (click)="pass(ingredient)">{{ingredient.ingredientName}}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -90,7 +66,7 @@
 		<div class="col-md">
 			<div class="jumbotron">
 				<legend text-align="center">Dinner</legend>
-				<table datatable [dtOptions]="dtOptionsDinnerIngredients" [dtTrigger]="dtTriggerDinnerIngredients" id="dinnerIngredients" class="display">
+				<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="Ingredients" class="display">
 					<thead>
 						<tr>
 							<th>Name</th>
@@ -98,7 +74,7 @@
 					</thead>
 					<tbody>
 						<tr *ngFor="let ingredient of ingredients">
-							<td>{{ingredient.ingredientName}}</td>
+							<td (click)="pass(ingredient)">{{ingredient.ingredientName}}</td>
 						</tr>
 					</tbody>
 				</table>
