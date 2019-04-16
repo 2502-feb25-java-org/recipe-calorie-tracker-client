@@ -1,6 +1,5 @@
 export interface Food {
-    id: number;
-	foodName: string;
+	name: string;
     ndbno: string;
     calories: number;
 }

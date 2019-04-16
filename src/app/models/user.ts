@@ -7,5 +7,4 @@ export class User {
     weight:number;
     height:number;
     maxCalorieIntake:number;
-    
 }

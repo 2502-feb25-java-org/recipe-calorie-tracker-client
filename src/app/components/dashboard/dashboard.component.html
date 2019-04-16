@@ -36,7 +36,7 @@
 			<div class="jumbotron">
 				<legend text-align="center">BreakFast</legend>
 				<div *ngIf="!breakfastSelectedIngredient">
-					<table datatable [dtOptions]="dtOptionsIngredients" [dtTrigger]="dtTriggerBreakfastIngredients" id="breakfastIngredients" class="display">
+					<table datatable [dtOptions]="dtOptionsBreakfastIngredients" [dtTrigger]="dtTriggerBreakfastIngredients" id="breakfastIngredients" class="display">
 						<thead>
 							<tr>
 								<th>Name</th>
@@ -58,7 +58,7 @@
 						</thead>
 						<tbody>
 							<tr *ngFor="let food of breakfastFoods" (click)="onBreakfastFoodSelect(food)">
-								<td>{{food.foodName}}</td>
+								<td>{{food.name}}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -73,7 +73,7 @@
 		<div class="col-md">
 			<div class="jumbotron">
 				<legend text-align="center">Lunch</legend>
-				<table datatable [dtOptions]="dtOptionsIngredients" [dtTrigger]="dtTriggerLunchIngredients" id="lunchIngredients" class="display">
+				<table datatable [dtOptions]="dtOptionsLunchIngredients" [dtTrigger]="dtTriggerLunchIngredients" id="lunchIngredients" class="display">
 					<thead>
 						<tr>
 							<th>Name</th>
@@ -90,7 +90,7 @@
 		<div class="col-md">
 			<div class="jumbotron">
 				<legend text-align="center">Dinner</legend>
-				<table datatable [dtOptions]="dtOptionsIngredients" [dtTrigger]="dtTriggerDinnerIngredients" id="dinnerIngredients" class="display">
+				<table datatable [dtOptions]="dtOptionsDinnerIngredients" [dtTrigger]="dtTriggerDinnerIngredients" id="dinnerIngredients" class="display">
 					<thead>
 						<tr>
 							<th>Name</th>
