@@ -17,8 +17,12 @@ import { FoodService } from 'src/app/services/food.service';
 export class DashboardComponent implements OnInit {
 
   public ingredients: Ingredient[] = [];
-  public dtOptionsIngredients: DataTables.Settings = {};
+  public dtOptionsBreakfastIngredients: DataTables.Settings = {};
+  public dtOptionsLunchIngredients: DataTables.Settings = {};
+  public dtOptionsDinnerIngredients: DataTables.Settings = {};
   public dtOptionsBreakfastFoods: DataTables.Settings = {};
+  public dtOptionsLunchFoods: DataTables.Settings = {};
+  public dtOptionsDinnerFoods: DataTables.Settings = {};
   public dtTriggerBreakfastIngredients: Subject<void> = null;
   public dtTriggerLunchIngredients: Subject<void> = null;
   public dtTriggerDinnerIngredients: Subject<void> = null;
@@ -51,7 +55,8 @@ export class DashboardComponent implements OnInit {
     if(sessionStorage.getItem("user") == null){
       this._router.navigateByUrl('');
     }
-    this._displayBreakfastFoodsTable();
+
+    this._displayBreakfastIngredientsTable();
     this._displayLunchIngredientsTable();
     this._displayDinnerIngredientsTable();
   }
@@ -74,7 +79,7 @@ export class DashboardComponent implements OnInit {
   private _displayBreakfastIngredientsTable() {
     this.dtTriggerBreakfastIngredients = new Subject();
 
-    this.dtOptionsIngredients = {
+    this.dtOptionsBreakfastIngredients = {
       pagingType: 'full_numbers',
       pageLength: 10
     };
@@ -93,7 +98,7 @@ export class DashboardComponent implements OnInit {
   private _displayLunchIngredientsTable() {
     this.dtTriggerLunchIngredients = new Subject();
 
-    this.dtOptionsIngredients = {
+    this.dtOptionsLunchIngredients = {
       pagingType: 'full_numbers',
       pageLength: 10
     };
@@ -112,7 +117,7 @@ export class DashboardComponent implements OnInit {
   private _displayDinnerIngredientsTable() {
     this.dtTriggerDinnerIngredients = new Subject();
 
-    this.dtOptionsIngredients = {
+    this.dtOptionsDinnerIngredients = {
       pagingType: 'full_numbers',
       pageLength: 10
     };
@@ -161,6 +166,7 @@ export class DashboardComponent implements OnInit {
   }
 
   public onBreakfastFoodSelect(food: Food) {
+    //console.log(food);
     this.breakfastSelectedFood = food;
   }
 }
