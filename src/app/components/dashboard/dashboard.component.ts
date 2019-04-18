@@ -16,7 +16,9 @@ import { FoodService } from 'src/app/services/food.service';
 })
 export class DashboardComponent implements OnInit {
 
-  public ingredients: Ingredient[] = [];
+  public breakfastIngredients: Ingredient[] = [];
+  public lunchIngredients: Ingredient[] = [];
+  public dinnerIngredients: Ingredient[] = [];
   public dtOptionsBreakfastIngredients: DataTables.Settings = {};
   public dtOptionsLunchIngredients: DataTables.Settings = {};
   public dtOptionsDinnerIngredients: DataTables.Settings = {};
@@ -40,15 +42,16 @@ export class DashboardComponent implements OnInit {
 
   public lunchSelectedIngredient: Ingredient = null;
   public lunchSelectedFood: Food = null;
+  public lunchFoods: Food[] = null;
 
   public dinnerSelectedIngredient: Ingredient = null;
   public dinnerSelectedFood: Food = null;
+  public dinnerFoods: Food[] = null;
 
   constructor(
     private _ingredientService: IngredientService,
     private _foodService: FoodService,
     private _router: Router) { 
-
   }
 
   ngOnInit() {
@@ -56,6 +59,36 @@ export class DashboardComponent implements OnInit {
       this._router.navigateByUrl('');
     }
 
+    this.dtOptionsBreakfastIngredients = {
+      pagingType: 'full_numbers',
+      pageLength: 10
+    };
+
+    this.dtOptionsLunchIngredients = {
+      pagingType: 'full_numbers',
+      pageLength: 10
+    };
+
+    this.dtOptionsDinnerIngredients = {
+      pagingType: 'full_numbers',
+      pageLength: 10
+    };
+
+    this.dtOptionsBreakfastFoods = {
+      pagingType: 'full_numbers',
+      pageLength: 10
+    };
+
+    this.dtOptionsLunchFoods = {
+      pagingType: 'full_numbers',
+      pageLength: 10
+    };
+
+    this.dtOptionsDinnerFoods = {
+      pagingType: 'full_numbers',
+      pageLength: 10
+    };
+    
     this._displayBreakfastIngredientsTable();
     this._displayLunchIngredientsTable();
     this._displayDinnerIngredientsTable();
@@ -63,10 +96,6 @@ export class DashboardComponent implements OnInit {
 
   private _displayBreakfastFoodsTable() {
     this.dtTriggerBreakfastFoods = new Subject();
-    this.dtOptionsBreakfastFoods = {
-      pagingType: 'full_numbers',
-      pageLength: 10
-    };
 
     if (this.breakfastSelectedIngredient) {
        this._foodService.getFoods(this.breakfastSelectedIngredient.ingredientName).subscribe( data => {
@@ -76,18 +105,35 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  private _displayLunchFoodsTable() {
+    this.dtTriggerLunchFoods = new Subject();
+
+    if (this.lunchSelectedIngredient) {
+       this._foodService.getFoods(this.lunchSelectedIngredient.ingredientName).subscribe( data => {
+         this.lunchFoods = data;
+         this.dtTriggerLunchFoods.next();
+       });
+    }
+  }
+
+  private _displayDinnerFoodsTable() {
+    this.dtTriggerDinnerFoods = new Subject();
+
+    if (this.dinnerSelectedIngredient) {
+       this._foodService.getFoods(this.dinnerSelectedIngredient.ingredientName).subscribe( data => {
+         this.dinnerFoods = data;
+         this.dtTriggerDinnerFoods.next();
+       });
+    }
+  }
+
   private _displayBreakfastIngredientsTable() {
     this.dtTriggerBreakfastIngredients = new Subject();
 
-    this.dtOptionsBreakfastIngredients = {
-      pagingType: 'full_numbers',
-      pageLength: 10
-    };
-
-    if (!this.ingredients || this.ingredients.length == 0) {
+    if (!this.breakfastIngredients || this.breakfastIngredients.length == 0) {
       this._ingredientService.getIngredients().subscribe( data => {
-        this.ingredients = data;
-        this.dtTriggerBreakfastIngredients.next();
+        this.breakfastIngredients = data;
+        setTimeout(x => this.dtTriggerBreakfastIngredients.next());
       });
     }
     else {
@@ -98,15 +144,10 @@ export class DashboardComponent implements OnInit {
   private _displayLunchIngredientsTable() {
     this.dtTriggerLunchIngredients = new Subject();
 
-    this.dtOptionsLunchIngredients = {
-      pagingType: 'full_numbers',
-      pageLength: 10
-    };
-
-    if (!this.ingredients || this.ingredients.length == 0) {
+    if (!this.lunchIngredients || this.lunchIngredients.length == 0) {
       this._ingredientService.getIngredients().subscribe( data => {
-        this.ingredients = data;
-        this.dtTriggerLunchIngredients.next();
+        this.lunchIngredients = data;
+        setTimeout(x => this.dtTriggerLunchIngredients.next());
       });
     }
     else {
@@ -117,15 +158,10 @@ export class DashboardComponent implements OnInit {
   private _displayDinnerIngredientsTable() {
     this.dtTriggerDinnerIngredients = new Subject();
 
-    this.dtOptionsDinnerIngredients = {
-      pagingType: 'full_numbers',
-      pageLength: 10
-    };
-
-    if (!this.ingredients || this.ingredients.length == 0) {
+    if (!this.dinnerIngredients || this.dinnerIngredients.length == 0) {
       this._ingredientService.getIngredients().subscribe( data => {
-        this.ingredients = data;
-        this.dtTriggerDinnerIngredients.next();
+        this.dinnerIngredients = data;
+        setTimeout(x => this.dtTriggerDinnerIngredients.next());
       });
     }
     else {
@@ -168,5 +204,43 @@ export class DashboardComponent implements OnInit {
   public onBreakfastFoodSelect(food: Food) {
     //console.log(food);
     this.breakfastSelectedFood = food;
+  }
+
+  public onLunchSelectedFoodReset() {
+    this.lunchSelectedFood = null;
+  }
+
+  public onLunchIngredientSelect(ingredient: Ingredient) {
+    this.lunchSelectedIngredient = ingredient;
+    if (ingredient) {
+      this._displayLunchFoodsTable();
+    }
+    else {
+      this._displayLunchIngredientsTable();
+    }
+  }
+
+  public onLunchFoodSelect(food: Food) {
+    //console.log(food);
+    this.lunchSelectedFood = food;
+  }
+
+    public onDinnerSelectedFoodReset() {
+    this.dinnerSelectedFood = null;
+  }
+
+  public onDinnerIngredientSelect(ingredient: Ingredient) {
+    this.dinnerSelectedIngredient = ingredient;
+    if (ingredient) {
+      this._displayDinnerFoodsTable();
+    }
+    else {
+      this._displayDinnerIngredientsTable();
+    }
+  }
+
+  public onDinnerFoodSelect(food: Food) {
+    //console.log(food);
+    this.dinnerSelectedFood = food;
   }
 }
