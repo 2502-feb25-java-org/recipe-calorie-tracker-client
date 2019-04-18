@@ -1,25 +1,3 @@
-<!-- 
-	<div class="jumbotron">
-		<legend>Recipe Calorie Tracker</legend>
-		<br>
-		<p text-align="center">Search functionality.</p>
-		<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="Ingredients" class="display">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Name</th>
-					<th>NDBNO</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr *ngFor="let ingredient of ingredients">
-					<td>{{ingredient.id}}</td>
-					<td>{{ingredient.ingredientName}}</td>
-					<td>{{ingredient.ndbno}}</td>
-				</tr>
-			</tbody>
-		</table>
-	</div> -->
 <div class="container">
     <div class="row d-flex justify-content-center">
         <input type="number" [(ngModel)]="maxCalories" placeholder="Enter Maximum Calories for today" />
@@ -54,11 +32,13 @@
                         <thead>
                             <tr>
                                 <th>Food</th>
+                                <th>Cal/100g</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let food of breakfastFoods" (click)="onBreakfastFoodSelect(food)">
                                 <td>{{food.name}}</td>
+                                <td>{{food.calories}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -92,11 +72,13 @@
                         <thead>
                             <tr>
                                 <th>Food</th>
+                                <th>Cal/100g</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let food of lunchFoods" (click)="onLunchFoodSelect(food)">
                                 <td>{{food.name}}</td>
+                                <td>{{food.calories}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -129,12 +111,14 @@
 					<table datatable [dtOptions]="dtOptionsDinnerFoods" [dtTrigger]="dtTriggerDinnerFood" id="dinnerFoods" class="display">
 						<thead>
 							<tr>
-								<th>Food</th>
+                                <th>Food</th>
+                                <th>Cal/100g</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr *ngFor="let food of dinnerFoods" (click)="onDinnerFoodSelect(food)">
-								<td>{{food.name}}</td>
+                                <td>{{food.name}}</td>
+                                <td>{{food.calories}}</td>
 							</tr>
 						</tbody>
 					</table>
