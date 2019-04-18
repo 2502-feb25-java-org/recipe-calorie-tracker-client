@@ -21,87 +21,129 @@
 		</table>
 	</div> -->
 <div class="container">
-	<div class="row d-flex justify-content-center">
-		<input type="number" [(ngModel)]="maxCalories" placeholder="Enter Maximum Calories for today"/>
-		<span>{{date}}</span>
-		<button class="btn btn-primary" type="submit">Create meal plan</button>
-	</div>
-	<div>
-		<br>
-		<br>
-		<span allign="center">Remaining calories: {{getRemainingCalories()}}</span>
-	</div>
-	<div class="row">
+    <div class="row d-flex justify-content-center">
+        <input type="number" [(ngModel)]="maxCalories" placeholder="Enter Maximum Calories for today" />
+        <span>{{date}}</span>
+        <button class="btn btn-primary" type="submit">Create meal plan</button>
+    </div>
+    <div>
+        <br>
+        <br>
+        <span allign="center">Remaining calories: {{getRemainingCalories()}}</span>
+    </div>
+    <div class="row">
+        <div class="col-md">
+            <div class="jumbotron">
+                <legend text-align="center">BreakFast</legend>
+                <div *ngIf="!breakfastSelectedIngredient && breakfastIngredients">
+                    <table datatable [dtOptions]="dtOptionsBreakfastIngredients" [dtTrigger]="dtTriggerBreakfastIngredients" id="breakfastIngredients" class="display">
+                        <thead>
+                            <tr>
+                                <th>Ingredient</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let ingredient of breakfastIngredients" (click)="onBreakfastIngredientSelect(ingredient)">
+                                <td>{{ingredient.ingredientName}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div *ngIf="breakfastSelectedIngredient && !breakfastSelectedFood">
+                    <table datatable [dtOptions]="dtOptionsBreakfastFoods" [dtTrigger]="dtTriggerBreakfastFood" id="breakfastFoods" class="display">
+                        <thead>
+                            <tr>
+                                <th>Food</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let food of breakfastFoods" (click)="onBreakfastFoodSelect(food)">
+                                <td>{{food.name}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button (click)="onBreakfastIngredientSelect(null)">Reset</button>
+                </div>
+                <div *ngIf="breakfastSelectedFood">
+                    {{breakfastSelectedFood.foodName}}
+                    <button (click)="onBreakfastSelectedFoodReset()">Reset</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="jumbotron">
+                <legend text-align="center">Lunch</legend>
+                <div *ngIf="!lunchSelectedIngredient && lunchIngredients">
+                    <table datatable [dtOptions]="dtOptionsLunchIngredients" [dtTrigger]="dtTriggerLunchIngredients" id="lunchIngredients" class="display">
+                        <thead>
+                            <tr>
+                                <th>Ingredient</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let ingredient of lunchIngredients" (click)="onLunchIngredientSelect(ingredient)">
+                                <td>{{ingredient.ingredientName}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div *ngIf="lunchSelectedIngredient && !lunchSelectedFood">
+                    <table datatable [dtOptions]="dtOptionsLunchFoods" [dtTrigger]="dtTriggerLunchFood" id="lunchFoods" class="display">
+                        <thead>
+                            <tr>
+                                <th>Food</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let food of lunchFoods" (click)="onLunchFoodSelect(food)">
+                                <td>{{food.name}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button (click)="onLunchIngredientSelect(null)">Reset</button>
+                </div>
+                <div *ngIf="lunchSelectedFood">
+                    {{lunchSelectedFood.foodName}}
+                    <button (click)="onLunchSelectedFoodReset()">Reset</button>
+                </div>
+            </div>
+		</div>
 		<div class="col-md">
 			<div class="jumbotron">
-				<legend text-align="center">BreakFast</legend>
-				<div *ngIf="!breakfastSelectedIngredient">
-					<table datatable [dtOptions]="dtOptionsBreakfastIngredients" [dtTrigger]="dtTriggerBreakfastIngredients" id="breakfastIngredients" class="display">
+				<legend text-align="center">Dinner</legend>
+				<div *ngIf="!dinnerSelectedIngredient && dinnerIngredients">
+					<table datatable [dtOptions]="dtOptionsDinnerIngredients" [dtTrigger]="dtTriggerDinnerIngredients" id="dinnerIngredients" class="display">
 						<thead>
 							<tr>
-								<th>Name</th>
+								<th>Ingredient</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr *ngFor="let ingredient of ingredients" (click)="onBreakfastIngredientSelect(ingredient)">
+							<tr *ngFor="let ingredient of dinnerIngredients" (click)="onDinnerIngredientSelect(ingredient)">
 								<td>{{ingredient.ingredientName}}</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
-				<div *ngIf="breakfastSelectedIngredient && !breakfastSelectedFood">
-					<table datatable [dtOptions]="dtOptionsBreakfastFoods" [dtTrigger]="dtTriggerBreakfastFood" id="breakfastFoods" class="display">
+				<div *ngIf="dinnerSelectedIngredient && !dinnerSelectedFood">
+					<table datatable [dtOptions]="dtOptionsDinnerFoods" [dtTrigger]="dtTriggerDinnerFood" id="dinnerFoods" class="display">
 						<thead>
 							<tr>
 								<th>Food</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr *ngFor="let food of breakfastFoods" (click)="onBreakfastFoodSelect(food)">
+							<tr *ngFor="let food of dinnerFoods" (click)="onDinnerFoodSelect(food)">
 								<td>{{food.name}}</td>
 							</tr>
 						</tbody>
 					</table>
-					<button (click)="onBreakfastIngredientSelect(null)">Reset</button>
+					<button (click)="onDinnerIngredientSelect(null)">Reset</button>
 				</div>
-				<div *ngIf="breakfastSelectedFood">
-					{{breakfastSelectedFood.foodName}}
-					<button (click)="onBreakfastSelectedFoodReset()">Reset</button>
+				<div *ngIf="dinnerSelectedFood">
+					{{dinnerSelectedFood.foodName}}
+					<button (click)="onDinnerSelectedFoodReset()">Reset</button>
 				</div>
-			</div>
-		</div>
-		<div class="col-md">
-			<div class="jumbotron">
-				<legend text-align="center">Lunch</legend>
-				<table datatable [dtOptions]="dtOptionsLunchIngredients" [dtTrigger]="dtTriggerLunchIngredients" id="lunchIngredients" class="display">
-					<thead>
-						<tr>
-							<th>Name</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr *ngFor="let ingredient of ingredients">
-							<td>{{ingredient.ingredientName}}</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<div class="col-md">
-			<div class="jumbotron">
-				<legend text-align="center">Dinner</legend>
-				<table datatable [dtOptions]="dtOptionsDinnerIngredients" [dtTrigger]="dtTriggerDinnerIngredients" id="dinnerIngredients" class="display">
-					<thead>
-						<tr>
-							<th>Name</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr *ngFor="let ingredient of ingredients">
-							<td>{{ingredient.ingredientName}}</td>
-						</tr>
-					</tbody>
-				</table>
 			</div>
 		</div>
 	</div>
