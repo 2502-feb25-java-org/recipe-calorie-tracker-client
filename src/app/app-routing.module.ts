@@ -7,6 +7,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { GraphComponent } from './components/graph/graph.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
@@ -14,7 +15,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'logout', component: LogoutComponent },
+  { path: 'graph', component: GraphComponent },
   { path: '**', component: PageNotFoundComponent }
+
 ];
 
 @NgModule({

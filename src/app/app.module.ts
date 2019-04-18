@@ -17,6 +17,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { IngredientService } from './services/ingredient.service';
 import { DataTablesModule } from 'angular-datatables';
+import { GraphComponent } from './components/graph/graph.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { DataTablesModule } from 'angular-datatables';
     NavbarComponent,
     HomepageComponent,
     FooterComponent,
-    LogoutComponent
+    LogoutComponent,
+    GraphComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,8 @@ import { DataTablesModule } from 'angular-datatables';
     FormsModule,
     HttpModule,
     HttpClientModule,
-    DataTablesModule
+    DataTablesModule,
+    ChartsModule
   ],
   providers: [
     UserService,

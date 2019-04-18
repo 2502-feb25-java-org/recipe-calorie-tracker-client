@@ -93,7 +93,9 @@ export class DashboardComponent implements OnInit {
     this._displayLunchIngredientsTable();
     this._displayDinnerIngredientsTable();
   }
-
+ public viewGraph(){
+   this._router.navigateByUrl("/graph");
+ }
   private _displayBreakfastFoodsTable() {
     this.dtTriggerBreakfastFoods = new Subject();
 
