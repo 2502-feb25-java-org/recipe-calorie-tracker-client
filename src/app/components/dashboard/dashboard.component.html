@@ -39,7 +39,7 @@
         <div class="col-md">
             <div class="jumbotron">
                 <legend text-align="center">Breakfast</legend>
-                <input type="number" id="bgrams" min ="1" max="9999" style = "float: right" placeholder="grams"><!--GRAMS--> 
+                Amount in Grams:<input type="number" id="bgrams" min ="1" max="9999" style = "float: right" placeholder="grams" value ="100"><!--GRAMS--> 
                 <div *ngIf="!breakfastSelectedIngredient && breakfastIngredients">
                 
                     <table datatable [dtOptions]="dtOptionsBreakfastIngredients" [dtTrigger]="dtTriggerBreakfastIngredients" id="breakfastIngredients" class="display">
@@ -80,7 +80,7 @@
         <div class="col-md">
             <div class="jumbotron">
                 <legend text-align="center">Lunch</legend>
-                <input type="number" id="lgrams" min ="1" max="9999" style = "float: right" placeholder="grams">
+                Amount in Grams:<input type="number" id="lgrams" min ="1" max="9999" style = "float: right" placeholder="grams" value ="100">
                 <div *ngIf="!lunchSelectedIngredient && lunchIngredients">
             
                     <table datatable [dtOptions]="dtOptionsLunchIngredients" [dtTrigger]="dtTriggerLunchIngredients" id="lunchIngredients" class="display">
@@ -120,7 +120,7 @@
 		<div class="col-md">
 			<div class="jumbotron">
                 <legend text-align="center">Dinner</legend>
-                <input type="number" id="dgrams" min ="1" max="9999" style = "float: right" placeholder="grams">
+                Amount in Grams:<input type="number" id="dgrams" min ="1" max="9999" style = "float: right" placeholder="grams" value ="100">
 				<div *ngIf="!dinnerSelectedIngredient && dinnerIngredients">
                         
 					<table datatable [dtOptions]="dtOptionsDinnerIngredients" [dtTrigger]="dtTriggerDinnerIngredients" id="dinnerIngredients" class="display">
