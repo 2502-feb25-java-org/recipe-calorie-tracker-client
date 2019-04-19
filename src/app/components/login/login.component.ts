@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  user:UserNamePassword = new UserNamePassword();
-  message:string = "";
+  public user:UserNamePassword = new UserNamePassword();
+  public message:string = "";
 
   constructor(private userService: UserService, private router: Router) { 
   
@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   }
 
   submit(): void {
+    this.message = null;
     this.userService.login(this.user)
         .subscribe( data => {
           if(data != null){
@@ -29,7 +30,7 @@ export class LoginComponent implements OnInit {
             this.router.navigateByUrl('/dashboard');
           }
           else{
-              this.message = "Wrong Credential"
+              this.message = "Login Failed";
               }
         });
 

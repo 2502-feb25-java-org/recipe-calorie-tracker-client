@@ -10,6 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 export class UserregisterComponent implements OnInit {
 
   user:User = new User();
+  public message: string = "";
 
   constructor(private userService: UserService) { }
 
@@ -17,9 +18,10 @@ export class UserregisterComponent implements OnInit {
   }
 
   registerUser(): void {
+    this.message = null;
     this.userService.registerUser(this.user)
         .subscribe( data => {
-          alert("User created successfully.");
+          this.message = "Thank you for registration. Click Log In to use the app.";
         });
 
   };

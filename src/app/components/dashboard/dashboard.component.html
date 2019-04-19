@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-md">
             <div class="jumbotron">
-                <legend text-align="center">BreakFast</legend>
+                <legend text-align="center">Breakfast</legend>
                 <div *ngIf="!breakfastSelectedIngredient && breakfastIngredients">
                     <table datatable [dtOptions]="dtOptionsBreakfastIngredients" [dtTrigger]="dtTriggerBreakfastIngredients" id="breakfastIngredients" class="display">
                         <thead>
@@ -30,7 +30,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div *ngIf="breakfastSelectedIngredient && !breakfastSelectedFood">
+                <div *ngIf="breakfastSelectedIngredient && !breakfastSelectedFood && breakfastFoods">
                     <table datatable [dtOptions]="dtOptionsBreakfastFoods" [dtTrigger]="dtTriggerBreakfastFood" id="breakfastFoods" class="display">
                         <thead>
                             <tr>
@@ -70,7 +70,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div *ngIf="lunchSelectedIngredient && !lunchSelectedFood">
+                <div *ngIf="lunchSelectedIngredient && !lunchSelectedFood && lunchFoods">
                     <table datatable [dtOptions]="dtOptionsLunchFoods" [dtTrigger]="dtTriggerLunchFood" id="lunchFoods" class="display">
                         <thead>
                             <tr>
@@ -110,7 +110,7 @@
 						</tbody>
 					</table>
 				</div>
-				<div *ngIf="dinnerSelectedIngredient && !dinnerSelectedFood">
+				<div *ngIf="dinnerSelectedIngredient && !dinnerSelectedFood && dinnerFoods">
 					<table datatable [dtOptions]="dtOptionsDinnerFoods" [dtTrigger]="dtTriggerDinnerFood" id="dinnerFoods" class="display">
 						<thead>
 							<tr>
