@@ -1,17 +1,22 @@
 <div class="container">
     <div class="row d-flex justify-content-center">
+            <div class ="col-12" style="text-align: center">
+                    <span><h2>{{date}}</h2></span>
+            
+                    
+                </div> <br><br>
         <input type="number" [(ngModel)]="maxCalories" placeholder="Enter Maximum Calories for today" />
-        <span>{{date}}</span>
-
-        <button class="btn btn-primary" id="gotime" (click)="saveday()" style="visibility: hidden">Save day</button>
+       
+        
     </div>
     <div>
-        <button (click)="viewGraph()">View History</button>
+            <button class="btn btn-primary" id="gotime" (click)="saveday()" style="visibility: hidden; background-color:orange;color:white">Save day</button>
+        <button (click)="viewGraph()" style ="float:right; background-color:orange;color:white" class = "btn-primary">View History</button>
     </div>
     <div>
         <br>
         <br>
-        <span allign="center">Remaining calories: {{getRemainingCalories()}}</span>
+        <span allign="center"><h2>Remaining calories: {{getRemainingCalories()}}</h2></span>
     </div>
     <div class="row">
         <div class="col-md">
