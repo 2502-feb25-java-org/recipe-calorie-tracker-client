@@ -22,14 +22,17 @@
     </div>
     <div class="form-group">
       <label >Username</label>
-      <input id="username" type="text" class="form-control" required appForbiddenName="thebest" [(ngModel)]="user.username" #username="ngModel" aria-describedby="emailHelp" placeholder="Username">
+      <input id="username" type="text" class="form-control" required pattern="[a-zA-Z][a-zA-Z0-9-_.]{1,20}" appForbiddenName="thebest" [(ngModel)]="user.username" #username="ngModel" aria-describedby="emailHelp" placeholder="Username">
       <div *ngIf="username.invalid && (username.dirty || username.touched)"
         class="alert alert-danger">
           <div *ngIf="username.errors.required">
             Username is a required field.
           </div>
-          <div *ngIf="username.errors.forbiddenName">
+          <div *ngIf="username.errors.appForbiddenName">
             This username is reserved.
+          </div>
+          <div *ngIf="username.errors.pattern">
+            Username must include only letters, numbers and underscore.
           </div>
       </div>
     </div>
@@ -67,7 +70,7 @@
     </div>
     <div class="form-group">
       <label>Height (ft and in)</label>
-      <input type="text" class="form-control" required pattern="^(?!$|.*\'[^\x22]+$)(?:([0-9]+)\')?(?:([0-9]+)\x22?)?$" [(ngModel)]="user.height" #height="ngModel" aria-describedby="emailHelp" placeholder="Height">
+      <input type="text" class="form-control" required pattern="{{heightPattern}}" [(ngModel)]="user.height" #height="ngModel" aria-describedby="emailHelp" placeholder="Height">
       <div *ngIf="height.invalid && (height.dirty || height.touched)"
         class="alert alert-danger">
           <div *ngIf="height.errors.required">

@@ -11,6 +11,7 @@ export class UserregisterComponent implements OnInit {
 
   user:User = new User();
   public message: string = "";
+  public heightPattern: string = "^(?!$|.*\'[^\x22]+$)(?:([0-9]+)\')?(?:([0-9]+)\x22?)?$";
 
   constructor(private userService: UserService) { }
 
