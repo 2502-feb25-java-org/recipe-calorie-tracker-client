@@ -1,36 +1,99 @@
-<div id="container">
-  <div class="form-group">
-    <label >First Name</label>
-    <input type="text" class="form-control" [(ngModel)]="user.firstName" aria-describedby="emailHelp" placeholder="First Name">
+<div class="jumbotron" align="center" style="display: flex; padding-bottom: 0; margin: 0;">
+  <div class="col-6">
+    <div class="form-group">
+      <label >First Name</label>
+      <input id="firstName" type="text" class="form-control" required [(ngModel)]="user.firstName" #firstName="ngModel" aria-describedby="emailHelp" placeholder="First Name">
+      <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
+        class="alert alert-danger">
+          <div *ngIf="firstName.errors.required">
+            Don't be so shy. We need to know how to address you.
+          </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label >Last Name</label>
+      <input id="lastName" type="text" class="form-control" required [(ngModel)]="user.lastName"  #lastName="ngModel"aria-describedby="emailHelp" placeholder="Last Name">
+      <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
+        class="alert alert-danger">
+          <div *ngIf="lastName.errors.required">
+            Don't be so shy. We need to know how to address you.
+          </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label >Username</label>
+      <input id="username" type="text" class="form-control" required appForbiddenName="thebest" [(ngModel)]="user.username" #username="ngModel" aria-describedby="emailHelp" placeholder="Username">
+      <div *ngIf="username.invalid && (username.dirty || username.touched)"
+        class="alert alert-danger">
+          <div *ngIf="username.errors.required">
+            Username is a required field.
+          </div>
+          <div *ngIf="username.errors.forbiddenName">
+            This username is reserved.
+          </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input id="password" type="password" class="form-control" required [(ngModel)]="user.password" #password="ngModel" placeholder="Password">
+      <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
+        class="alert alert-danger">
+          <div *ngIf="password.errors.required">
+            Password is a required field.
+          </div>
+      </div>
+    </div>
   </div>
-
-  <div class="form-group">
-    <label >Last Name</label>
-    <input type="text" class="form-control" [(ngModel)]="user.lastName" aria-describedby="emailHelp" placeholder="Last Name">
+  <div class="col-6">
+    <div class="form-group">
+      <label>Age</label>
+      <input type="number" class="form-control" min="16" max="120" required [(ngModel)]="user.age" #age="ngModel" aria-describedby="emailHelp" placeholder="Age">
+      <div *ngIf="age.invalid && (age.dirty || age.touched)"
+        class="alert alert-danger">
+          <div *ngIf="age.errors.required">
+            Age is a required field.
+          </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Weight (lbs)</label>
+      <input type="number" class="form-control" required min="50" [(ngModel)]="user.weight" #weight="ngModel" aria-describedby="emailHelp" placeholder="Weight">
+      <div *ngIf="weight.invalid && (weight.dirty || weight.touched)"
+        class="alert alert-danger">
+          <div *ngIf="weight.errors.required">
+            Enter correct weight. Your secret will be safe with us.
+          </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Height (ft and in)</label>
+      <input type="text" class="form-control" required pattern="^(?!$|.*\'[^\x22]+$)(?:([0-9]+)\')?(?:([0-9]+)\x22?)?$" [(ngModel)]="user.height" #height="ngModel" aria-describedby="emailHelp" placeholder="Height">
+      <div *ngIf="height.invalid && (height.dirty || height.touched)"
+        class="alert alert-danger">
+          <div *ngIf="height.errors.required">
+            Height is a required field.
+          </div>
+          <div *ngIf="height.errors.pattern">
+            Height should be in feet and inches (e.g. 5'10").
+          </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Max Calorie Intake</label>
+      <input type="number" class="form-control" required min="0" [(ngModel)]="user.maxCalorieIntake" #maxCalorieIntake="ngModel" aria-describedby="emailHelp" placeholder="Max Calorie Intake">
+    <div *ngIf="maxCalorieIntake.invalid && (maxCalorieIntake.dirty || maxCalorieIntake.touched)"
+        class="alert alert-danger">
+          <div *ngIf="maxCalorieIntake.errors.required">
+            You need to eat to survive. Enter at least something.
+          </div>
+      </div>
+    </div>
   </div>
-<div class="form-group">
-  <label >User Name</label>
-  <input type="text" class="form-control" [(ngModel)]="user.username" aria-describedby="emailHelp" placeholder="User Name">
 </div>
-<div class="form-group">
-  <label for="exampleInputPassword1">Password</label>
-  <input type="password" class="form-control" [(ngModel)]="user.password" placeholder="Password">
-</div>
-<div class="form-group">
-  <label >  age</label>
-  <input type="number" class="form-control" [(ngModel)]="user.age" aria-describedby="emailHelp" placeholder="age">
-</div>
-<div class="form-group">
-  <label >  weight</label>
-  <input type="number" class="form-control" [(ngModel)]="user.weight" aria-describedby="emailHelp" placeholder="weight">
-</div>
-<div class="form-group">
-  <label > height</label>
-  <input type="number" class="form-control" [(ngModel)]="user.height" aria-describedby="emailHelp" placeholder="height">
-</div>
-<div class="form-group">
-  <label >  MAX CALORIE INTAKE</label>
-  <input type="number" class="form-control" [(ngModel)]="user.maxCalorieIntake" aria-describedby="emailHelp" placeholder="MAX CALORIE INTAKE">
-</div>
-<button class="btn btn-primary" id="submit" (click)="registerUser()" >Submit</button>
+<div class="jumbotron" align="center" style="margin: 0;">
+  <div style="color: blue">{{message}}</div>
+  <br>
+  <button class="btn btn-primary" id="submit" (click)="registerUser()" style="background-color:orange;color:white;"
+  [disabled]="firstName.invalid || lastName.invalid || password.invalid || age.invalid || weight.invalid
+  || height.invalid || maxCalorieIntake.invalid">Register</button>
 </div>
