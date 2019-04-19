@@ -24,7 +24,8 @@
     <div class="row d-flex justify-content-center">
         <input type="number" [(ngModel)]="maxCalories" placeholder="Enter Maximum Calories for today" />
         <span>{{date}}</span>
-        <button class="btn btn-primary" type="submit">Create meal plan</button>
+
+        <button class="btn btn-primary" id="gotime" (click)="saveday()" style="visibility: hidden">Save day</button>
     </div>
     <div>
         <button (click)="viewGraph()">View History</button>
@@ -37,9 +38,12 @@
     <div class="row">
         <div class="col-md">
             <div class="jumbotron">
-                <legend text-align="center">BreakFast</legend>
+                <legend text-align="center">Breakfast</legend>
+                <input type="number" id="bgrams" min ="1" max="9999" style = "float: right" placeholder="grams"><!--GRAMS--> 
                 <div *ngIf="!breakfastSelectedIngredient && breakfastIngredients">
+                
                     <table datatable [dtOptions]="dtOptionsBreakfastIngredients" [dtTrigger]="dtTriggerBreakfastIngredients" id="breakfastIngredients" class="display">
+                        
                         <thead>
                             <tr>
                                 <th>Ingredient</th>
@@ -76,7 +80,9 @@
         <div class="col-md">
             <div class="jumbotron">
                 <legend text-align="center">Lunch</legend>
+                <input type="number" id="lgrams" min ="1" max="9999" style = "float: right" placeholder="grams">
                 <div *ngIf="!lunchSelectedIngredient && lunchIngredients">
+            
                     <table datatable [dtOptions]="dtOptionsLunchIngredients" [dtTrigger]="dtTriggerLunchIngredients" id="lunchIngredients" class="display">
                         <thead>
                             <tr>
@@ -113,8 +119,10 @@
 		</div>
 		<div class="col-md">
 			<div class="jumbotron">
-				<legend text-align="center">Dinner</legend>
+                <legend text-align="center">Dinner</legend>
+                <input type="number" id="dgrams" min ="1" max="9999" style = "float: right" placeholder="grams">
 				<div *ngIf="!dinnerSelectedIngredient && dinnerIngredients">
+                        
 					<table datatable [dtOptions]="dtOptionsDinnerIngredients" [dtTrigger]="dtTriggerDinnerIngredients" id="dinnerIngredients" class="display">
 						<thead>
 							<tr>
