@@ -7,6 +7,7 @@ import {Food } from '../../models/food';
 import { Subject } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { FoodService } from 'src/app/services/food.service';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 
 
 @Component({
@@ -51,7 +52,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private _ingredientService: IngredientService,
     private _foodService: FoodService,
-    private _router: Router) { 
+    private _router: Router,
+    private http: HttpClient) { 
   }
 
   ngOnInit() {
@@ -170,19 +172,43 @@ export class DashboardComponent implements OnInit {
       setTimeout(x => this.dtTriggerDinnerIngredients.next());
     }
   }
-
+  public result = 0;
   public getTotalCalories(): number {
-    let result = 0;
+    this.result = 0;
+    let tempcal = 0;
     if (this.breakfastSelectedFood && this.breakfastSelectedFood.calories) {
-      result += this.breakfastSelectedFood.calories;
+      this.trigger1=true;
+      if(parseFloat((<HTMLInputElement>document.getElementById("bgrams")).value) != NaN){
+      let bgram= parseFloat((<HTMLInputElement>document.getElementById("bgrams")).value);
+      tempcal =  bgram * (this.breakfastSelectedFood.calories/100) ;
+      console.log(tempcal);}
+      else{tempcal=this.breakfastSelectedFood.calories}
+      this.result += tempcal ;
+      //SEND DATA TO BACKEND
     }
     if (this.lunchSelectedFood && this.lunchSelectedFood.calories) {
-      result += this.lunchSelectedFood.calories;
+      this.trigger2=true;
+      if(  parseFloat((<HTMLInputElement>document.getElementById("lgrams")).value) != NaN){
+      let bgram= parseFloat((<HTMLInputElement>document.getElementById("lgrams")).value);
+      tempcal =  bgram * (this.lunchSelectedFood.calories/100) ;
+      console.log(tempcal);}
+      else{tempcal=this.lunchSelectedFood.calories}
+      this.result += tempcal ;
     }
     if (this.dinnerSelectedFood && this.dinnerSelectedFood.calories) {
-      result += this.dinnerSelectedFood.calories;
+      this.trigger3=true;
+      if(parseFloat((<HTMLInputElement>document.getElementById("dgrams")).value) != NaN){
+      let bgram= parseFloat((<HTMLInputElement>document.getElementById("dgrams")).value);
+      tempcal =  bgram * (this.dinnerSelectedFood.calories/100) ;
+      console.log(tempcal);}
+      else{tempcal=this.dinnerSelectedFood.calories}
+      this.result += tempcal ;
     }
-    return result;
+    if(this.trigger1 && this.trigger2 && this.trigger3){
+      console.log("VIS");
+      document.getElementById("gotime").style.visibility="visible";
+    }
+    return this.result;
   }
 
   public getRemainingCalories(): number {
@@ -244,5 +270,22 @@ export class DashboardComponent implements OnInit {
   public onDinnerFoodSelect(food: Food) {
     //console.log(food);
     this.dinnerSelectedFood = food;
+  }
+  public gotime=false;
+  public trigger1=false;
+  public trigger2=false;
+  public trigger3=false;
+  public saveday(){
+    document.getElementById("gotime").style.visibility="hidden";
+   // alert("saved your day!");
+    
+    let temp = JSON.parse(sessionStorage.getItem("user"));
+    let uid =temp['id'];
+    let totalCalories = this.result;
+    let meal={uid, totalCalories};
+    this.http.post("http://localhost:8080/rct/account/2", meal).subscribe( data => {
+      alert("Saved your day!");
+    });;
+    location.replace("/dashboard");
   }
 }
