@@ -5,6 +5,6 @@ export class User {
     password:string;
     age:number;
     weight:number;
-    height:number;
+    height:string;
     maxCalorieIntake:number;
 }
